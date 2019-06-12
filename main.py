@@ -1,12 +1,22 @@
 from datetime import datetime, date
 import csv
+from os import path
+
+
+directory_path = path.dirname(path.realpath(__file__))
 
 
 # Reads dates from birthdays.csv
-# Assigns them to self.birthdays
+# Assigns them to birthdays dictionary
 def init_dictionary() -> dict:
     birthdays = {}
-    with open("Desktop/Scripts/BirthdaysPy/birthdays.csv", "r") as csv_file:
+    # birthdays.csv is the file birthdays are written in
+    # example :
+
+    # name1,day/month
+    # name2,day/month
+    # ...
+    with open(f"{directory_path}/birthdays.csv", "r") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
         for row in csv_reader:
