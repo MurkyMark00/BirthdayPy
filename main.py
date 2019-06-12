@@ -29,15 +29,18 @@ def closest_birthday(birthdays: dict) -> list:
 
     for key, value in birthdays.items():
 
-        # If the distance between iterated date and today is smaller than the one before, switch them.
-        if abs(datetime.today() - datetime.strptime(f"{key}/{datetime.today().year}", "%d/%m/%Y")) < remaining_time:
+        difference = abs(datetime.today() -
+                         datetime.strptime(f"{key}/{datetime.today().year}", "%d/%m/%Y"))
 
-            remaining_time = abs(
-                datetime.today() - datetime.strptime(f"{key}/{datetime.today().year}", "%d/%m/%Y"))
+        # If the distance between iterated date and today is smaller than the one before, switch them.
+        if difference < remaining_time:
+
+            remaining_time = difference
 
             closest_date = key
             closest_name = value
 
+    # Getting rid of the decimal point (miliseconds)
     return [closest_date, closest_name, str(remaining_time).split('.')[0]]
 
 
